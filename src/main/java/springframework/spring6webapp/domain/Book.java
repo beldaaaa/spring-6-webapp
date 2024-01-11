@@ -2,6 +2,7 @@ package springframework.spring6webapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class Book {
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
     //normally JPA and Hibernate would make 2 tables (Author and Book)
     //so I need to tell Hibernate I want join table
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     public Long getId() {
         return id;
