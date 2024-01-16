@@ -14,7 +14,8 @@ public class Book {
     private String isbn;
 
     @ManyToMany
-    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "autor_id"))
     //normally JPA and Hibernate would make 2 tables (Author and Book)
     //so I need to tell Hibernate I want join table
     private Set<Author> authors = new HashSet<>();
@@ -23,6 +24,10 @@ public class Book {
 
     public Long getId() {
         return id;
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 
     public String getTitle() {
@@ -41,9 +46,6 @@ public class Book {
         this.title = title;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
 
     public void setId(Long id) {
         this.id = id;

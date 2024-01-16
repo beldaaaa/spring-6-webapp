@@ -33,13 +33,21 @@ public class BootstrapData implements CommandLineRunner {//IF provided by Spring
 
     @Override
     public void run(String... args) {//must be implemented when using CommandLineRunner
-        Author author = new Author();
-        author.setFirstName("Tvoje");
-        author.setLastName("Mama");
+        Author author1 = new Author();
+        author1.setFirstName("Tvoje");
+        author1.setLastName("Mama");
 
-        Book book = new Book();
-        book.setTitle("MCBP");
-        book.setIsbn("111");
+        Book book1 = new Book();
+        book1.setTitle("MCBP");
+        book1.setIsbn("111");
+
+        Author author2 = new Author();
+        author2.setFirstName("Cudriho");
+        author2.setLastName("Mama");
+
+        Book book2 = new Book();
+        book2.setTitle("CMCBP");
+        book2.setIsbn("C111");
 
         Publisher publisher = new Publisher();
         publisher.setPublisherName("Velke Zvire");
@@ -49,34 +57,26 @@ public class BootstrapData implements CommandLineRunner {//IF provided by Spring
         publisher.setZip("OdBundy");
 
         //when I save that author - a new object is returned by repository IF
-        Author authorSaved = authorRepository.save(author);
-        Book bookSaved = bookRepository.save(book);
-        Publisher publisherSaved = publisherRepository.save(publisher);
-
-        Author author2 = new Author();
-        author.setFirstName("Tvoje");
-        author.setLastName("Mama");
-
-        Book book2 = new Book();
-        book.setTitle("MCBP");
-        book.setIsbn("111");
+        Author author1Saved = authorRepository.save(author1);
+        Book book1Saved = bookRepository.save(book1);
 
         Author author2Saved = authorRepository.save(author2);
         Book book2Saved = bookRepository.save(book2);
+        Publisher publisherSaved = publisherRepository.save(publisher);
 
-        authorSaved.getBooks().add(bookSaved);//building an association between created book and created author
+        author1Saved.getBooks().add(book1Saved);//building an association between created book and created author
         author2Saved.getBooks().add(book2Saved);
+        book1Saved.getAuthors().add(author1Saved);
+        book2Saved.getAuthors().add(author2Saved);
 
-        bookSaved.setPublisher(publisherSaved);
+        book1Saved.setPublisher(publisherSaved);
         book2Saved.setPublisher(publisherSaved);
 
         //I added books,...but I did not persist them, so I am adding it now
-        authorRepository.save(authorSaved);
+        authorRepository.save(author1Saved);
         authorRepository.save(author2Saved);//without those 2 lines I would not hve persisted the book association
-
-        bookRepository.save(bookSaved);
+        bookRepository.save(book1Saved);
         bookRepository.save(book2Saved);
-
 
         System.out.println("in Bootstrap");
         System.out.println("Authors count: " + authorRepository.count());
