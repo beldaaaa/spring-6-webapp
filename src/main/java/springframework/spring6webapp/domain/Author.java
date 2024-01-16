@@ -7,6 +7,18 @@ import java.util.Set;
 
 @Entity
 //if we use Jakarta persistence, this tells JPA this is going to be an entity persisted to DB
+
+//@Entity annotation defines that a class can be mapped to a table. And that is it, it is just a marker,
+// like for example Serializable interface.
+//And why @Entity annotation is mandatory? ... well, it is the way how JPA is designed.
+//When you create a new entity you have to do at least two things:
+    // 1) annotated it with @Entity
+    // 2)create an id field and annotate it with @Id
+//Anything else is optional, for example table name is derived from entity class name
+//(and therefore @Table annotation can be optional), table's columns are derived from
+// entities variables (and therefore @Column annotation can be optional), and so on ...
+
+//Every instance of an entity represents a row in the table.
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //in a lesson he had to those 2 annotations because Author

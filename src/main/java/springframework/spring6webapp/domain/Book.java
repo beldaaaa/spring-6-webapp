@@ -18,6 +18,8 @@ public class Book {
     //normally JPA and Hibernate would make 2 tables (Author and Book)
     //so I need to tell Hibernate I want join table
     private Set<Author> authors = new HashSet<>();
+    @ManyToOne
+    private Publisher publisher;
 
     public Long getId() {
         return id;
@@ -25,6 +27,10 @@ public class Book {
 
     public String getTitle() {
         return title;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
     }
 
     public Set<Author> getAuthors() {
@@ -49,6 +55,10 @@ public class Book {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override
