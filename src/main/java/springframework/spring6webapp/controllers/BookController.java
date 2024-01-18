@@ -21,9 +21,15 @@ public class BookController {
 
     @RequestMapping("/books")//spring will register books, so when I go to 8080/books Spring knows
     //to invoke this method and provide that result
-    //but at this point nothing would happen because I havent provided a VIEW for that yet (later)
     public String getBooks(Model model) {
-        model.addAttribute("books", bookService.findAll());//this is effectively like a map and property key
+        model.addAttribute("books", bookService.findAll());//it tells Spring Boot to look for
+        // a VIEW called books, going to bookService, findAll will call bookRepository, that is provided by
+        //Spring Data JPA that is going through in conjunction with Hibernate to go through DB and
+        //get list of all books in DB then return that value
+        //So the Spring fwk is going to be passing that model into getBooks to find all operations
+        //after That Thymeleaf will process that template using the template language
+        //in books.html line 16 iterator is set to go through and replace the text "661,... and it will occur for each book
         return "books";
+        //default location where its going to start finding is resources-templates-...
     }
 }
