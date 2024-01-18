@@ -18,7 +18,6 @@ public class BootstrapData implements CommandLineRunner {//IF provided by Spring
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
-
     private final PublisherRepository publisherRepository;
 
     public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
@@ -66,8 +65,8 @@ public class BootstrapData implements CommandLineRunner {//IF provided by Spring
 
         author1Saved.getBooks().add(book1Saved);//building an association between created book and created author
         author2Saved.getBooks().add(book2Saved);
-        book1Saved.getAuthors().add(author1Saved);
-        book2Saved.getAuthors().add(author2Saved);
+        book1Saved.getAuthors().add(author1Saved);//without those 2 lines there would be
+        book2Saved.getAuthors().add(author2Saved);//empty AUTHOR_BOOK (missing relation from the other side)
 
         book1Saved.setPublisher(publisherSaved);
         book2Saved.setPublisher(publisherSaved);
